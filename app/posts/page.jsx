@@ -9,24 +9,28 @@ const Posts = () => {
       content: 'Obcaecati, quam?...',
       imageUrl: 'https://tailus.io/sources/blocks/end-image/preview/images/graphic.svg',
       link: '#',
+      id:1
     },
     {
       title: 'UI Design',
       content: 'Obcaecati, quam?...',
       imageUrl: 'https://tailus.io/sources/blocks/end-image/preview/images/ui-design.svg',
       link: '#',
+      id:2
     },
     {
       title: 'UX Design',
       content: 'Obcaecati, quam?...',
       imageUrl: 'https://tailus.io/sources/blocks/end-image/preview/images/ux-design.svg',
       link: '#',
+      id:3
     },
     {
       title: 'UX Design',
       content: 'Obcaecati, quam?...',
       imageUrl: 'https://tailus.io/sources/blocks/end-image/preview/images/ux-design.svg',
       link: '#',
+      id:4
     },
   ];
 
@@ -44,6 +48,7 @@ const Posts = () => {
               content={post.content}
               imageUrl={post.imageUrl}
               link={post.link}
+              id={post.id}
             />
           ))}
         </div>

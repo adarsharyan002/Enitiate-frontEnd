@@ -5,7 +5,7 @@ const PostDetails = ({params}) => {
 
     const post = {
         title: 'Graphic Design',
-        content: 'Obcaecati, quam?...',
+        content: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
         imageUrl: 'https://tailus.io/sources/blocks/end-image/preview/images/graphic.svg',
         link: '#',
       }
