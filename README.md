@@ -11,7 +11,7 @@ Follow these steps to set up the project locally:
 2. Navigate to the project directory:
     ```bash
     cd Enitiate-frontEnd
-3. Navigate to the project directory:
+3. Install the dependencies:
     ```bash
     npm install
 3. Start the development server:
