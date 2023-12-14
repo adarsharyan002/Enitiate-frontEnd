@@ -30,12 +30,10 @@ const Posts = () => {
           const uid = user.uid;
           // ...
           setIsLoggedIn(true)
-          console.log("uid", uid)
         } else {
           // User is signed out
           // ...
           router.push('/signIn')
-          console.log("user is logged out")
         }
       });
      

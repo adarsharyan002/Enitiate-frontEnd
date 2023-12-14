@@ -9,7 +9,6 @@ const PostDetails = ({params}) => {
   const dispatch = useDispatch();
   const { singlePost, fetchingSinglePost, singlePostError } = useSelector((state) => state.posts);
 
-  console.log(singlePost)
   useEffect(() => {
     dispatch(fetchSinglePost(params.id)); // Fetch post based on ID from params
   }, [dispatch, params.id]);

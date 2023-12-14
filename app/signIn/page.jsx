@@ -10,7 +10,6 @@ import { useRouter } from 'next/navigation'
 
 
 const SignIn = () => {
-  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage,setErrorMessage] = useState('')
@@ -24,7 +23,6 @@ const SignIn = () => {
         // Signed in
         const user = userCredential.user;
         
-        console.log(user);
         router.push('/posts')
     })
     .catch((error) => {
@@ -34,9 +32,8 @@ const SignIn = () => {
    
 }
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  
+
 
   return (
     <div className="bg-gradient-to-r from-gray-800 via-black to-blue-900 absolute top-0 left-0  bottom-0 leading-5 h-full w-full overflow-hidden">
@@ -48,7 +45,7 @@ const SignIn = () => {
   />
 </div>
 
-      <div className="relative min-h-screen sm:flex sm:flex-row justify-center lg:gap-40 md:gap-32 sm:gap-20 bg-transparent rounded-3xl shadow-xl">
+      <div className="relative min-h-screen flex  justify-center lg:gap-40  bg-transparent rounded-3xl shadow-xl">
         {/* Left side content */}
         <div className="flex-col flex self-center lg:px-4 sm:max-w-4xl xl:max-w-md z-10">
           <div className="self-start hidden lg:flex flex-col text-gray-300">
@@ -83,31 +80,10 @@ const SignIn = () => {
                 <input
                   placeholder="Password"
                   onChange={(e)=>setPassword(e.target.value)}
-                  type={showPassword ? 'password' : 'text'}
-                  className="text-sm text-gray-200 px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400"
+                  type='password'
+                  className="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
                 />
-                <div className="flex items-center absolute inset-y-0 right-0 mr-3 text-sm leading-5">
-                  <svg
-                    onClick={togglePasswordVisibility}
-                    className={`${showPassword ? 'block' : 'hidden'} h-4 text-purple-700`}
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    
-                    viewBox="0 0 576 512"
-                  >
-                    {/* ... */}
-                  </svg>
-                  {/* The eye icon when the password is hidden */}
-                  <svg
-                    onClick={togglePasswordVisibility}
-                    className={`${showPassword ? 'hidden' : 'block'} h-4 text-purple-700`}
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 640 512"
-                  >
-                    {/* ... */}
-                  </svg>
-                </div>
+                
               </div>
               <div>
               <div className="flex items-center mb-4">
@@ -127,15 +103,13 @@ const SignIn = () => {
               <p className='mt-2'>{errorMessage}</p>
 					</div>
 
-              {/* Rest of your form elements */}
-              {/* ... */}
+              
 
             </div>
           </div>
         </div>
       </div>
 
-      {/* Footer */}
     
 
       

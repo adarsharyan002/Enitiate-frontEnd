@@ -23,7 +23,6 @@ const Home = () => {
           const uid = user.uid;
           // ...
           router.push('/posts')
-          console.log("uid", uid)
         } else {
           // User is signed out
           // ...
