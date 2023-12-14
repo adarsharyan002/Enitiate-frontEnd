@@ -66,7 +66,7 @@ const SignIn = () => {
             <div className="mb-7">
               <h3 className="font-semibold text-2xl text-gray-800">Sign In </h3>
               <p className="text-gray-400">
-                Don't have an account? <Link href="/signUp" className="text-sm text-purple-700 hover:text-purple-700">Sign Up</Link>
+                Do not have an account? <Link href="/signUp" className="text-sm text-purple-700 hover:text-purple-700">Sign Up</Link>
               </p>
             </div>
             <div className="space-y-6">

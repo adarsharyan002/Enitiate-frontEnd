@@ -39,7 +39,7 @@ const Posts = () => {
         }
       });
      
-}, [])
+}, [router])
 
 //fetching data
 useEffect(() => {
