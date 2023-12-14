@@ -4,9 +4,35 @@ import Image from 'next/image';
 import logo from '../signIn/logo.svg';
 import companyLogo from '../signIn/company_logo.svg';
 import Link from "next/link"
+import {  createUserWithEmailAndPassword  } from 'firebase/auth';
+import { auth } from '../firebase';
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('')
+  const [errorMessage,setErrorMessage] = useState('')
+
+  const [password, setPassword] = useState('');
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+   
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          
+          // ...
+      })
+      .catch((error) => {
+          const errorCode = error.code;
+          setErrorMessage( error.message)
+          // ..
+      });
+
+ 
+  }
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -56,6 +82,7 @@ const SignUp = () => {
                   className="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
                   type="email"
                   placeholder="Email"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 
@@ -63,6 +90,7 @@ const SignUp = () => {
                 <input
                   placeholder="Password"
                   type={showPassword ? 'password' : 'text'}
+                  onChange={(e) => setPassword(e.target.value)} 
                   className="text-sm text-gray-200 px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400"
                 />
                 <div className="flex items-center absolute inset-y-0 right-0 mr-3 text-sm leading-5">
@@ -99,9 +127,10 @@ const SignUp = () => {
         I agree to terms and conditions
       </label>
     </div>
-						<button type="submit" class="w-full flex justify-center bg-blue-900  hover:bg-blue-800 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
+						<button onClick={onSubmit} type="submit" class="w-full flex justify-center bg-blue-900  hover:bg-blue-800 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
                 Sign Up
               </button>
+              <p className='mt-2'>{errorMessage}</p>
 					</div>
 
               {/* Rest of your form elements */}

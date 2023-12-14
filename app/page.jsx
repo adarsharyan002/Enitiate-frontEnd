@@ -1,11 +1,39 @@
 
-
+'use client'
 import Image from 'next/image';
+import  {  useEffect } from 'react';
 import logo from './signIn/logo.svg';
 import companyLogo from './signIn/company_logo.svg';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from './firebase';
 import Link from 'next/link';
+import {  signOut } from "firebase/auth";
+import { useRouter } from 'next/navigation';
 
-const SignIn = () => {
+
+const Home = () => {
+
+  const router = useRouter();
+
+  useEffect(()=>{
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          const uid = user.uid;
+          // ...
+          router.push('/posts')
+          console.log("uid", uid)
+        } else {
+          // User is signed out
+          // ...
+          console.log("user is logged out")
+        }
+      });
+     
+}, [router])
+
+
  
 
   return (
@@ -16,18 +44,19 @@ const SignIn = () => {
     width={120}
     alt="Company Logo"
   />
+
 </div>
 
-       <section class="h-screen bg-cover" >
-  <div class="flex h-full w-full items-center justify-center container mx-auto px-8">
-    <div class="max-w-4xl text-center">
-      <h1 class="text-3xl sm:text-5xl capitalize tracking-widest text-white lg:text-7xl">Welcome to Enitiate</h1>
+       <section className="h-screen bg-cover" >
+  <div className="flex h-full w-full items-center justify-center container mx-auto px-8">
+    <div className="max-w-4xl text-center">
+      <h1 className="text-3xl sm:text-5xl capitalize tracking-widest text-white lg:text-7xl">Welcome to Enitiate</h1>
 
-      <p class="mt-6 lg:text-lg text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti ad repudiandae nobis consectetur magni? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum, laboriosam.</p>
+      <p className="mt-6 lg:text-lg text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti ad repudiandae nobis consectetur magni? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum, laboriosam.</p>
 
-      <div class="mt-8 flex flex-col space-y-3 sm:-mx-2 sm:flex-row sm:justify-center sm:space-y-0">
+      <div className="mt-8 flex flex-col space-y-3 sm:-mx-2 sm:flex-row sm:justify-center sm:space-y-0">
 
-        <button class="transform rounded-md bg-blue-900  hover:bg-blue-800 px-8 py-2 text-sm font-medium capitalize tracking-wide text-white transition-colors duration-200  focus:bg-blue-800 focus:outline-none sm:mx-2"><Link href='/signUp'>Login/SignUp</Link></button>
+        <button className="transform rounded-md bg-blue-900  hover:bg-blue-800 px-8 py-2 text-sm font-medium capitalize tracking-wide text-white transition-colors duration-200  focus:bg-blue-800 focus:outline-none sm:mx-2"><Link href='/signUp'>Login/SignUp</Link></button>
       </div>
     </div>
   </div>
@@ -40,4 +69,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Home;

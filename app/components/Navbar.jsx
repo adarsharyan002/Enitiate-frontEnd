@@ -3,9 +3,17 @@
 import  { useState } from 'react';
 import Image from 'next/image';
 import logo from '../signIn/company_logo.svg'
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import {  signOut } from "firebase/auth";
+import { auth } from '../firebase';
 
-const Navbar = () => {
+
+
+
+const Navbar = ({isLoggedIn}) => {
   const [open, setOpen] = useState(true);
+  const router=useRouter();
 
   const toggleMenu = () => {
     setOpen(!open);
@@ -15,8 +23,21 @@ const Navbar = () => {
     setOpen(!open);
   };
 
+  //handling logout
+
+  const handleLogout = () => {               
+    signOut(auth).then(() => {
+    // Sign-out successful.
+    router.push('/')
+       
+        console.log("Signed out successfully")
+    }).catch((error) => {
+    // An error happened.
+    });
+  }
+
   return (
-    // <div className="min-h-screen">
+   
       <div className="antialiased bg-customBlue dark-mode:bg-gray-900">
         <div className="w-full text-gray-700 bg-customBlue dark-mode:text-gray-200 dark-mode:bg-gray-800">
           <div
@@ -81,7 +102,13 @@ const Navbar = () => {
               >
                 Contact
               </a>
-              {/* Other navigation links go here */}
+
+              {
+                    isLoggedIn?<button onClick={handleLogout} className="px-4 py-2 text-gray-100 mt-2 text-lg font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                    >Logout</button>:<Link className="px-4 py-2 text-gray-100 mt-2 text-lg font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                    href='/signIn'>Login</Link>
+              }
+              
 
               <div
                 onClick={toggleMoreOptions}

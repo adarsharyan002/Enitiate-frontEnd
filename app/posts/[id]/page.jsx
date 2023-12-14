@@ -1,22 +1,27 @@
-
-import Post from "../Post";
+'use client'
+import  { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchSinglePost } from '../../GlobalRedux/slices/postsSlice'; // Replace with your actual slice path
+import Post from '../Post';
 
 const PostDetails = ({params}) => {
 
-    const post = {
-        title: 'Graphic Design',
-        content: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
-        imageUrl: 'https://tailus.io/sources/blocks/end-image/preview/images/graphic.svg',
-        link: '#',
-      }
+  const dispatch = useDispatch();
+  const { singlePost, fetchingSinglePost, singlePostError } = useSelector((state) => state.posts);
+
+  console.log(singlePost)
+  useEffect(() => {
+    dispatch(fetchSinglePost(params.id)); // Fetch post based on ID from params
+  }, [dispatch, params.id]);
+
     // const id = params.id
     return ( 
         <div className="flex justify-center items-center h-screen">
+          
         <Post
-              title={post.title}
-              content={post.content}
-              imageUrl={post.imageUrl}
-              link={post.link}
+              title={singlePost?.title}
+              content={singlePost?.body}
+              display={true}
             />
             </div>
 
